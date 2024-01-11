@@ -54,7 +54,7 @@ function proj() {
 
         # check if file is empty
         if [[ ! -s "$file_path" ]]; then
-            echo "No projects found, use 'proj --add' to add a project"
+            echo "no projects found, use 'proj --add' to add a project"
             return 1
         fi
 
@@ -87,7 +87,7 @@ function proj() {
             name=$2
             path=$(realpath $3)
             echo "$name $path" >> $file_path
-            echo "Added project '$name' with path '$path'"
+            echo "added project '$name' with path '$path'"
             return 0
         fi
     fi
@@ -116,7 +116,7 @@ function proj() {
             after=$(sed "/$name /d" $file_path)
             echo "$after" > $file_path
 
-            echo "Removed project '$name'"
+            echo "removed project '$name'"
             return 0
         fi
     fi

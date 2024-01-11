@@ -59,7 +59,18 @@ function proj() {
         fi
 
         # list all projects
-        cat $file_path
+        while read -r line; do
+            name=$(echo $line | cut -d' ' -f1)
+            path=$(echo $line | cut -d' ' -f2)
+            valid=$([ -d "$path" ] && echo 0 || echo 1)
+
+            if [[ $valid -eq 0 ]]; then
+                echo "✔ $name: $path"
+            else
+                echo "✘ $name: $path"
+            fi
+        done < $file_path
+
         return 0
     fi
 

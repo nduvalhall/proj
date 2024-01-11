@@ -30,7 +30,7 @@ function proj() {
 
     # if first argument is --version or -v, show version
     if [[ $1 == "--version" || $1 == "-v" ]]; then
-        echo "proj version 0.2"
+        echo "proj version 0.2.1"
         return 0
     fi
 
@@ -96,7 +96,16 @@ function proj() {
 
             # add project
             name=$2
+            path=$3
+
+            # check if path is valid
+            if [[ ! -d $path ]]; then
+                echo "path '$path' is invalid"
+                return 1
+            fi
+
             path=$(realpath $3)
+
             echo "$name $path" >> $file_path
             echo "added project '$name' with path '$path'"
             return 0

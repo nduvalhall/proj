@@ -154,6 +154,13 @@ function proj() {
             # open project
             name=$2
             path=$(grep "$name " $file_path | cut -d' ' -f2)
+
+            # check if path is valid
+            if [[ ! -d $path ]]; then
+                echo "project '$name' has an invalid path"
+                return 1
+            fi
+
             cd $path
             return 0
         fi

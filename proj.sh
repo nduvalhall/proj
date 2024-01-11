@@ -174,4 +174,16 @@ function proj() {
             return 0
         fi
     fi
+
+
+    # if argument is none of the options
+    echo "usage: proj [options] [project name]"
+    echo "options:"
+    echo "  --list, -l: list all projects"
+    echo "  --add, -a: add project"
+    echo "  --remove, -r: remove project"
+    echo "  --help, -h: show this message"
+    echo "  --version, -v: show version"
+    echo "  --open, -o: open project"
+    return 1
 }

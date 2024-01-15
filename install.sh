@@ -1,16 +1,24 @@
 #!/bin/bash
 
 # install fzf
-apt=$(which apt)
-dnf=$(which dnf)
+fzf=$(which fzf)
 
-if [ -n "$apt" ]; then
-    sudo apt install fzf
-elif [ -n "$dnf" ]; then
-    sudo dnf install fzf
+if [ -n "$fzf" ]; then
+    echo "fzf already installed"
+    exit 0
+
 else
-    echo "Error: no package manager found"
-    exit 1
+    apt=$(which apt)
+    dnf=$(which dnf)
+
+    if [ -n "$apt" ]; then
+        sudo apt install fzf
+    elif [ -n "$dnf" ]; then
+        sudo dnf install fzf
+    else
+        echo "Error: no apt or dnf found, please install fzf manually"
+        exit 1
+    fi
 fi
 
 # copy proj.sh to /usr/local/bin

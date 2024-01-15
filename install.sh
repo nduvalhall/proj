@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# copy proj.sh to /usr/local/bin
-sudo cp ./proj.sh /usr/local/bin/
-
 # install fzf
 apt=$(which apt)
 dnf=$(which dnf)
@@ -16,7 +13,13 @@ else
     exit 1
 fi
 
+# copy proj.sh to /usr/local/bin
+sudo cp ./proj.sh /usr/local/bin/
 
+# check if already in .bashrc
+if grep -q "source /usr/local/bin/proj.sh" ~/.bashrc; then
+    exit 0
+fi
 
 # add proj.sh to ~/.bashrc
 echo "" >> ~/.bashrc

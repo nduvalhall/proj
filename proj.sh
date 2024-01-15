@@ -14,17 +14,32 @@ function proj() {
     file=$(cat $file_path)
 
 
-    # if no arguments are passed, show help
+    # if no arguments are passed, show fzf
     if [[ $# -eq 0 ]]; then
-        echo "usage: proj [options] [project name]"
-        echo "options:"
-        echo "  --list, -l: list all projects"
-        echo "  --add, -a: add project"
-        echo "  --remove, -r: remove project"
-        echo "  --help, -h: show this message"
-        echo "  --version, -v: show version"
-        echo "  --open, -o: open project"
-        return 1
+        project_path=$(cat $file_path | fzf)
+        project=$(echo $project_path | cut -d' ' -f1)
+        path=$(echo $project_path | cut -d' ' -f2)
+        cd $path
+        return 0
+    fi
+
+
+    # if first agument is not '--' or '-'
+    if [[ $1 != -* ]]; then
+        
+        # check if project exists
+        count=$(grep -c "$1 " $file_path)
+
+        if [[ $count -eq 0 ]]; then
+            echo "project '$1' not found"
+            return 1
+        fi
+
+        # open project
+        name=$1
+        path=$(grep "$name " $file_path | cut -d' ' -f2)
+        cd $path
+        return 0
     fi
 
 
@@ -37,7 +52,7 @@ function proj() {
 
     # if first argument is --help or -h, show help
     if [[ $1 == "--help" || $1 == "-h" ]]; then
-        echo "usage: proj [options] [project name]"
+        echo "usage: proj [project name] | [options] ..."
         echo "options:"
         echo "  --list, -l: list all projects"
         echo "  --add, -a: add project"

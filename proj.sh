@@ -19,6 +19,11 @@ function proj() {
         project_path=$(cat $file_path | fzf)
         project=$(echo $project_path | cut -d' ' -f1)
         path=$(echo $project_path | cut -d' ' -f2)
+
+        if [[ $project == "" ]]; then
+            return 1
+        fi
+
         cd $path
         return 0
     fi

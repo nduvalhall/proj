@@ -5,7 +5,6 @@ fzf=$(which fzf)
 
 if [ -n "$fzf" ]; then
     echo "fzf already installed"
-    exit 0
 
 else
     apt=$(which apt)

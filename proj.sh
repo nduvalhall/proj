@@ -16,7 +16,7 @@ function proj() {
 
     # if no arguments are passed, show fzf
     if [[ $# -eq 0 ]]; then
-        project_path=$(cat $file_path | fzf)
+        project_path=$(cat $file_path | fzf --reverse --height 10)
         project=$(echo $project_path | cut -d' ' -f1)
         path=$(echo $project_path | cut -d' ' -f2)
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function proj() {
 	if [[ $1 == "help" || $1 == "h" ]]; then

@@ -1,6 +1,15 @@
 #!/bin/bash
 
 function proj() {
+	if [[ $1 == "help" || $1 == "h" ]]; then
+		echo "proj - A command line tool to quickly switch between projects"
+		echo "Usage: proj [add | remove | help]"
+		echo "  add: Add the current directory to proj"
+		echo "  remove: Remove a directory from proj"
+		echo "  help: Display this help message"
+		return
+	fi
+
 	proj_path=$HOME/.local/share/proj
 	config_file=$proj_path/config
 
@@ -29,6 +38,16 @@ function proj() {
 
 		mv $proj_path/temp $config_file
 		echo "Removed $file_path from proj"
+		return
+	fi
+
+	if [[ $1 ]]; then
+		echo "Invalid command"
+		echo "proj - A command line tool to quickly switch between projects"
+		echo "Usage: proj [add | remove | help]"
+		echo "  add: Add the current directory to proj"
+		echo "  remove: Remove a directory from proj"
+		echo "  help: Display this help message"
 		return
 	fi
 
